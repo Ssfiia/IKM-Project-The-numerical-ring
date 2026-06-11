@@ -45,7 +45,7 @@ public:
     char getDigit(int index) const;
     //Преобразование в строку
     std::string toString() const;
-    //Извлечение последовательность цифр из списка
+    //Извлечение последовательности цифр из списка
     std::string extractSubring(int start, int length) const;
     //Проверка совпадения последовательностей
     bool isSameSequence(const std::string& seq, int startPos) const;
