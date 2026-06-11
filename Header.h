@@ -19,7 +19,7 @@ class RingList {
 private:
     RingNode* head;
     int size;
-
+    //Копирование
     void copyFrom(const RingList& other);
 
 public:
@@ -58,7 +58,7 @@ private:
     int n;
     //Проверка является ли строка числом
     bool isValidNumber(const std::string& num) const;
-    //Сумма двух чисел
+    //Сумма двух чисел, записанных в виде стрк
     std::string addStrings(const std::string& a, const std::string& b) const;
 
 public:
