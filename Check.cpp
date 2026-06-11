@@ -55,7 +55,7 @@ int Check::checkNumberSimple(const std::string& prompt) {
     do {
         std::cout << prompt;
         std::getline(std::cin, input);
-        //Вввод не пуст
+        //Ввод не пуст
         if (input.empty()) {
             std::cout << "Ошибка: ввод не может быть пустым" << std::endl;
             continue;
