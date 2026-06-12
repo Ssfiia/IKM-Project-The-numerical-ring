@@ -30,26 +30,31 @@ std::string RingSolver::addStrings(const std::string& a, const std::string& b) c
     std::reverse(result.begin(), result.end());
     return result;
 }
-//Перебор всех возмодых вариантов троек A+B=C
+//Перебор всех возможных вариантов троек A+B=C
 std::string RingSolver::solve() {
+    int maxLen = n / 2;
     //Перебор всех возможных стартовых позиций
-for (int startPos = 0; startPos < n; startPos++) {
-        //Переборр длин чисел
-        for (int lenA = 1; lenA <= n - 2; lenA++) {
-            for (int lenB = 1; lenB <= n - lenA - 1; lenB++) {
+
+    for (int startPos = 0; startPos < n; startPos++) {
+        //перебор возможных длин для А и В
+        for (int lenA = 1; lenA <= (maxLen < n - 2 ? maxLen : n - 2); lenA++) {
+            if (lenA > maxLen) continue;
+            for (int lenB = 1; lenB <= (maxLen < n - lenA - 1 ? maxLen : n - lenA - 1); lenB++) {
+                if (lenB > maxLen) continue;
                 int lenC = n - lenA - lenB;
                 if (lenC < 1) continue;
+                if (lenC > maxLen + 1) continue;
                 //Извлечение чисел из списка
                 std::string a = ring.extractSubring(startPos, lenA);
                 std::string b = ring.extractSubring(startPos + lenA, lenB);
                 std::string c = ring.extractSubring(startPos + lenA + lenB, lenC);
-                //Проерка на число
+                //Проверка на число
                 if (!isValidNumber(a) || !isValidNumber(b) || !isValidNumber(c)) {
                     continue;
                 }
                 //Подсчёт суммы
                 std::string sum = addStrings(a, b);
-                //Если суммма совпала с третим извлечённым числом, то это решения
+                //Если сумма совпала с третьим извлечённым числом, то это решения
                 if (sum == c && ring.isSameSequence(a + b + c, startPos)) {
                     return a + "+" + b + "=" + c;
                 }

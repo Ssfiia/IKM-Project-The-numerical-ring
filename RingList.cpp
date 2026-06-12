@@ -68,13 +68,17 @@ void RingList::addDigit(char digit) {
 }
 //Получение цифры индекса 
 char RingList::getDigit(int index) const {
+    if (isEmpty() || index < 0 || index >= size) {
+        throw std::out_of_range("Индекс вне диапазона");
+    }
+
     RingNode* current = head;
     for (int i = 0; i < index; i++) {
         current = current->next;
     }
     return current->digit;
 }
-//Пробразование в строку
+//Преобразование в строку
 std::string RingList::toString() const {
     if (isEmpty()) return "";
 
@@ -86,7 +90,7 @@ std::string RingList::toString() const {
     }
     return result;
 }
-//Извлечение последователльностей цифр из списка
+//Извлечение последовательностей цифр из списка
 std::string RingList::extractSubring(int start, int length) const {
     if (length <= 0 || start < 0 || start >= size) {
         return "";
@@ -102,6 +106,7 @@ std::string RingList::extractSubring(int start, int length) const {
 //Проверка  совпадает ли вся последовательность кольца с переданной строкой
 bool RingList::isSameSequence(const std::string& seq, int startPos) const {
     if ((int)seq.length() != size) return false;
+    if (startPos < 0 || startPos >= size) return false;
 
     for (int i = 0; i < size; i++) {
         int pos = (startPos + i) % size;
